@@ -1,0 +1,10 @@
+.wz_close_button {
+    cursor: pointer;
+    border: none;
+    background-color: inherit;
+    color: #4C9ED9;
+}
+
+.wz-error {
+    color: maroon;
+}

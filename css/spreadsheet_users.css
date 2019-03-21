@@ -1,0 +1,8 @@
+input[type="text"] {
+    display: block;
+    margin-bottom: 15px;
+}
+
+.sweet-alert fieldset{
+    display: none;
+}
