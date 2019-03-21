@@ -73,7 +73,7 @@ function wz_workhard_ajax_dialog() {
         wp_die();
     }
     
-    $token = get_option('wz_options_workhard')['toke'];
+    $token = get_option('wz_options_workhard')['token'];
         
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         if (wzz_validate_params(array('method')) && $_GET['method'] == 'fetch_list_messages') {
