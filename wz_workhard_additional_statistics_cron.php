@@ -212,16 +212,17 @@ function wz_clear_scheduled_additional_statistics($schedule_interval){
  */
 function wz_fetch_tasks_ids_from_workhard() {
     $token = get_option('wz_options_workhard')['token'];
-    $folders = wzz_fetch_folders($token)['response'];
-    $tasks_ids = array();
+    $folders = wzz_fetch_folders_array($token)['response'];
+    $tasks_ids = [];
 
     foreach ($folders as $folder) {
-        $options = array(
-            'where' => array(
-                array('status.alias', '==', 'Завершена')
-            )
-        );
-        $tasks_in_folders = Arrch::find($folder['tasks'], $options);
+        $options = [
+            'where' => [
+                ['status.alias', '==', 'Завершена']
+            ]
+        ];
+        $tasks = wzz_fetch_folder_tasks($token, $folder['id']);
+        $tasks_in_folders = Arrch::find($tasks, $options);
 
         foreach ($tasks_in_folders as $task) {
             $tasks_ids[] = $task['id'];

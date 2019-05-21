@@ -19,8 +19,7 @@ function wz_workhard_settings_users_callback() {
     $users = get_users();
     $token = get_option('wz_options_workhard')['token'];
     $categories = get_categories(array('hide_empty' => 0));
-    $folders = wzz_fetch_folders($token);
-    
+    $folders = wzz_fetch_folders_array($token);
 ?>
     <div class="wrap">
         <div id="app">

@@ -67,18 +67,33 @@ function wzz_send_message($token, $chat_id, $message) {
     return json_decode($response, true);
 }
 
-/* 
- * Получить список всех папок
+/*
+ * Получить список всех папок(массив)
  *
  * @param string $token
  * @return array
  */
-function wzz_fetch_folders($token){
-    $headers = array(
+function wzz_fetch_folders_array($token){
+    $headers = [
         'Accept: application/json',
         'Authorization: Bearer ' . $token
-    );
-    $response = wzz_request('GET', 'https://api.workhard.online/v1/customer/task/folders', array(), $headers);
+    ];
+    $response = wzz_request('GET', 'http://api.workhard.kosmoz.online/v2/customer/task/folders/array', [], $headers);
+    return json_decode($response, true);
+}
+
+/*
+ * Получить список задач для заданной папки
+ *
+ * @param string $token
+ * @return array
+ */
+function wzz_fetch_folder_tasks($token, $folder_id){
+    $headers = [
+        'Accept: application/json',
+        'Authorization: Bearer ' . $token
+    ];
+    $response = wzz_request('GET', 'http://api.workhard.kosmoz.online/v2/customer/task/folder/' . $folder_id . '/tasks', [], $headers);
     return json_decode($response, true);
 }
 
@@ -94,7 +109,7 @@ function wzz_fetch_task_by_id($token, $task_id){
         'Accept: application/json',
         'Authorization: Bearer ' . $token
     );
-    $response = wzz_request('GET', 'https://api.workhard.online/v1/customer/task/' . $task_id, array(), $headers);
+    $response = wzz_request('GET', 'https://api.workhard.online/v2/customer/task/' . $task_id, array(), $headers);
     return json_decode($response, true);
 }
 
@@ -110,7 +125,7 @@ function wzz_fetch_task_logs($token, $task_id) {
         'Accept: application/json',
         'Authorization: Bearer ' . $token
     );
-    $response = wzz_request('GET', 'https://api.workhard.online/v1/customer/task/' . $task_id . '/logs', array(), $headers);
+    $response = wzz_request('GET', 'https://api.workhard.online/v2/customer/task/' . $task_id . '/logs', array(), $headers);
     return json_decode($response, true);    
 }
 
@@ -133,7 +148,7 @@ function wzz_move_task_to_folder($token, $folder_id,  $task_id) {
         'folder_id' => $folder_id
     );
     
-    $response = wzz_request('POST', 'https://api.workhard.online/v1/customer/task/' . $task_id . '/move', $post_data, $headers);
+    $response = wzz_request('POST', 'https://api.workhard.online/v2/customer/task/' . $task_id . '/move', $post_data, $headers);
     return json_decode($response, true);
 }
 
@@ -178,9 +193,9 @@ function wzz_request($method_name, $url, $params = array(), $headers = array()){
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
     }
     
-    if ($method_name == 'GET'){
+    if ($method_name === 'GET'){
         $url .= '?' . http_build_query($params);
-    } elseif($method_name == 'POST'){
+    } elseif($method_name === 'POST'){
 	    $params_encode = http_build_query($params);
         curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $params_encode);
