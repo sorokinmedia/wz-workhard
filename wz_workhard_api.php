@@ -78,7 +78,7 @@ function wzz_fetch_folders_array($token){
         'Accept: application/json',
         'Authorization: Bearer ' . $token
     ];
-    $response = wzz_request('GET', 'http://api.workhard.kosmoz.online/v2/customer/task/folders/array', [], $headers);
+    $response = wzz_request('GET', 'https://api.workhard.online/v2/customer/task/folders/array', [], $headers);
     return json_decode($response, true);
 }
 
@@ -93,7 +93,7 @@ function wzz_fetch_folder_tasks($token, $folder_id){
         'Accept: application/json',
         'Authorization: Bearer ' . $token
     ];
-    $response = wzz_request('GET', 'http://api.workhard.kosmoz.online/v2/customer/task/folder/' . $folder_id . '/tasks', [], $headers);
+    $response = wzz_request('GET', 'https://api.workhard.online/v2/customer/task/folder/' . $folder_id . '/tasks', [], $headers);
     return json_decode($response, true);
 }
 
