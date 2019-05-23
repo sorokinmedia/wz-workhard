@@ -36,7 +36,7 @@ function wz_workhard_articles_callback()
     $price_field = null;
 
     foreach ($options_spreadsheet_users as $item) {
-        if ($item['user_id'] === $current_user_id) {
+        if ($item['user_id'] == $current_user_id) {
             $price_field = $item['price'];
             break;
         }
@@ -195,17 +195,17 @@ function wz_workhard_ajax_articles()
             /* Получить статью */
             $token = get_option('wz_options_workhard')['token'];
 
-            $task = wzz_fetch_task_by_id($token, $_GET['task_id']);
+            $task = wzz_fetch_task_by_id($token, $_GET['task_id'])['response'];
 
-            $result = $task['response']['results'];
+            $result = $task['results'];
 
 
             $article = array(
-                'order_name' => $task['response']['name'],
+                'order_name' => $task['name'],
                 'title' => $result[0]['value'],
                 'description' => $result[1]['value'],
                 'text' => $result[2]['value'],
-                'total_price' => $task['response']['price_customer'] + $task['response']['price_additional_customer']
+                'total_price' => $task['price_customer'] + $task['price_additional_customer']
             );
             echo json_encode($article);
             wp_die();
@@ -271,15 +271,15 @@ function wz_workhard_ajax_articles()
 
             $service = wz_google_create_service('Wordpress', $json_data);
 
-            $range_columns = 'A:H';
+            $range_columns = "A:H";
 
             // Узнать пользователя id
             $current_user_id = get_current_user_id();
             foreach ($options_spreadsheet_users as $item) {
-                if ($item['user_id'] === $current_user_id) {
+                if ($item['user_id'] == $current_user_id) {
                     $count_rows = wz_google_count_rows($service, $options['id'], $item['table_name'], $range_columns);
 
-                    if ($count_rows === 0) {
+                    if ($count_rows == 0) {
                         /* Если нету записей в таблице, то вставить по умолчанию заголовки столбцов */
                         $columns_names = array(
                             'Дата', 'Название папки', 'Название задания', 'Адрес страницы', 'Стоимость',
