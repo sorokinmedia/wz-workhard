@@ -70,8 +70,8 @@ function wz_workhard_ajax_spreadsheet_users() {
         wp_die();
     }
     
-    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-        if (wzz_validate_params(array('method')) && $_GET['method'] == 'fetch_spreadsheet_users') {
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        if (wzz_validate_params(array('method')) && $_GET['method'] === 'fetch_spreadsheet_users') {
             $options = get_option('wz_workhard_google_spreadsheet_users');
             
             $options = array_map(function($item) {
@@ -83,8 +83,8 @@ function wz_workhard_ajax_spreadsheet_users() {
             echo json_encode($options);
             wp_die();
         }
-    } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        if (wzz_validate_params(array('method', 'user_id',  'table_name', 'price')) && $_POST['method'] == 'insert_google_spreadsheet_user') {
+    } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (wzz_validate_params(array('method', 'user_id',  'table_name', 'price')) && $_POST['method'] === 'insert_google_spreadsheet_user') {
             $options = get_option('wz_workhard_google_spreadsheet_users');
             
             $_POST = array_map('trim', $_POST);
@@ -99,7 +99,7 @@ function wz_workhard_ajax_spreadsheet_users() {
                 echo json_encode( array('status' => 'error') );
                 wp_die();
             }
-        } elseif (wzz_validate_params(array('method', 'user_id')) && $_POST['method'] == 'remove_google_spreadsheet_user') {
+        } elseif (wzz_validate_params(array('method', 'user_id')) && $_POST['method'] === 'remove_google_spreadsheet_user') {
             $_POST = array_map('trim', $_POST);
             
             $options = get_option('wz_workhard_google_spreadsheet_users');

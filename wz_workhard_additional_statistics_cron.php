@@ -84,15 +84,15 @@ function wz_cron_additional_statistics_callback() {
     // если задач нет, то отключить экспорт каждых 5 секунд и поменять статус в ready
     if ($count_diff_tasks_ids > 0) {
         $export_tasks = get_option('export_tasks');
-        if (!$export_tasks || $export_tasks['status'] == 'ready' || $export_tasks['status'] == 'preparation') {;
+        if (!$export_tasks || $export_tasks['status'] === 'ready' || $export_tasks['status'] === 'preparation') {
             update_option('export_tasks', array('status'=> 'works'));
             
             wz_run_schedule_addional_statistics('5seconds');
             return;
         }
-    } elseif ($count_diff_tasks_ids == 0) {
+    } elseif ($count_diff_tasks_ids === 0) {
         $export_tasks = get_option('export_tasks');
-        if (!$export_tasks || $export_tasks['status'] == 'works' || $export_tasks['status'] == 'preparation') {
+        if (!$export_tasks || $export_tasks['status'] === 'works' || $export_tasks['status'] === 'preparation') {
             update_option('export_tasks', array('status'=> 'ready'));
             
             wz_clear_scheduled_additional_statistics('5seconds');
@@ -181,9 +181,9 @@ function wz_cron_additional_statistics_callback() {
  * Запустить крон выполнения экспорта статистики по задачам
  */
 function wz_run_schedule_addional_statistics($schedule_interval) {
-    if ($schedule_interval == 'hourly') {
+    if ($schedule_interval === 'hourly') {
         $schedule_name = 'wz_cron_additional_statistics_hourly';
-    } elseif ($schedule_interval == '5seconds') {
+    } elseif ($schedule_interval === '5seconds') {
         $schedule_name = 'wz_cron_additional_statistics_5seconds';
         $time = wp_next_scheduled($schedule_name);
         if ($time) {
@@ -197,9 +197,9 @@ function wz_run_schedule_addional_statistics($schedule_interval) {
  * Отключить крон выполнения экспорта статистики по задачам
  */
 function wz_clear_scheduled_additional_statistics($schedule_interval){
-    if ($schedule_interval == 'hourly') {
+    if ($schedule_interval === 'hourly') {
         $schedule_name = 'wz_cron_additional_statistics_hourly';
-    } elseif ($schedule_interval == '5seconds') {
+    } elseif ($schedule_interval === '5seconds') {
         $schedule_name = 'wz_cron_additional_statistics_5seconds';
     }
     $time = wp_next_scheduled($schedule_name);
@@ -262,5 +262,3 @@ function wz_fetch_tasks_ids_from_google_table() {
         
     return $tasks_ids;
 }
-
-?>

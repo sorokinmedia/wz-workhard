@@ -76,15 +76,15 @@ function wz_workhard_ajax_dialog() {
     $token = get_option('wz_options_workhard')['token'];
         
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-        if (wzz_validate_params(array('method')) && $_GET['method'] == 'fetch_list_messages') {
+        if (wzz_validate_params(array('method')) && $_GET['method'] === 'fetch_list_messages') {
             echo json_encode(wzz_fetch_list_messages($token));
             wp_die();
-        } else if (wzz_validate_params(array('method', 'id')) && $_GET['method'] == 'fetch_messages_by_id') {
+        } else if (wzz_validate_params(array('method', 'id')) && $_GET['method'] === 'fetch_messages_by_id') {
             echo json_encode(wzz_fetch_messages_by_id($token, $_GET['id']));
             wp_die();
         }
     } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if (wzz_validate_params(array('method', 'id', 'message')) && $_POST['method'] == 'send_message') {
+        if (wzz_validate_params(array('method', 'id', 'message')) && $_POST['method'] === 'send_message') {
             $response = wzz_send_message($token, $_POST['id'], $_POST['message']);
             echo( json_encode( $response ) );
             wp_die();

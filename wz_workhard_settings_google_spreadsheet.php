@@ -167,7 +167,7 @@ function wz_options_sanitize_google_spreadsheet($options){
     // Загрузка данных с json файла
     $upfile_type = $_FILES['json_auth']['type'];
     $valid_json_data = true;
-    if(!empty($_FILES['json_auth']) && $upfile_type == 'application/json'){
+    if(!empty($_FILES['json_auth']) && $upfile_type === 'application/json'){
         $uploaded_file = file_get_contents($_FILES['json_auth']['tmp_name']);
         $json_data = json_decode($uploaded_file, true);
         $valid_json_data = wz_validate_google_json_auth($json_data);

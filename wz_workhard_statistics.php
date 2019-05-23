@@ -124,13 +124,13 @@ function wz_workhard_ajax_statistics() {
     }
    
     
-    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-        if (wzz_validate_params(array('method')) && $_GET['method'] == 'get_info_export_tasks') {
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        if (wzz_validate_params(array('method')) && $_GET['method'] === 'get_info_export_tasks') {
             // Получить статус экспорта задач
             echo json_encode(get_option('export_tasks'));
             wp_die();
             
-        } elseif (wzz_validate_params(array('method')) && $_GET['method'] == 'run_export_tasks') {
+        } elseif (wzz_validate_params(array('method')) && $_GET['method'] === 'run_export_tasks') {
             // Запустить экспорт задач
             update_option('export_tasks', array('status' => 'preparation'));
             wz_run_schedule_addional_statistics('5seconds');
@@ -138,19 +138,19 @@ function wz_workhard_ajax_statistics() {
             echo json_encode(get_option('export_tasks'));
             wp_die();
             
-        } elseif (wzz_validate_params(array('method')) && $_GET['method'] == 'get_info_export_billing') {
+        } elseif (wzz_validate_params(array('method')) && $_GET['method'] === 'get_info_export_billing') {
             // Получить статус экспорта биллинга
             echo json_encode(get_option('export_billing'));
             wp_die();
             
-        } elseif (wzz_validate_params(array('method')) && $_GET['method'] == 'run_export_billing') {
+        } elseif (wzz_validate_params(array('method')) && $_GET['method'] === 'run_export_billing') {
              // Запустить экспорт биллинга
             update_option('export_billing', array('status' => 'preparation'));
             wz_run_schedule_billing();
             
             echo json_encode(get_option('export_billing'));
             wp_die();
-        } elseif (wzz_validate_params(array('method')) && $_GET['method'] == 'fetch_table_costs') {
+        } elseif (wzz_validate_params(array('method')) && $_GET['method'] === 'fetch_table_costs') {
             // Получить данные с гугл таблицы занесенные расходы пользователем  
             $username = wp_get_current_user()->user_login;
 
@@ -160,8 +160,8 @@ function wz_workhard_ajax_statistics() {
             wp_die();
             
         }  
-    } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        if (wzz_validate_params(array('method', 'site', 'costs_name', 'sum')) && $_POST['method'] == 'add_row_costs') {
+    } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (wzz_validate_params(array('method', 'site', 'costs_name', 'sum')) && $_POST['method'] === 'add_row_costs') {
             // Добавить запись о расходах в гугл таблицу
             $options_google_spreadsheet = get_option('wz_options_google_spreadsheet');
             $range_columns = 'A:G';

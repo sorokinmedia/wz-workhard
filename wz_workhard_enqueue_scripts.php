@@ -3,7 +3,7 @@
 add_action( 'admin_enqueue_scripts', 'wz_workhard_enqueue_scripts' );
 
 function wz_workhard_enqueue_scripts( $hook_suffix ){
-	if ($hook_suffix == 'toplevel_page_wz-workhard') {
+	if ($hook_suffix === 'toplevel_page_wz-workhard') {
         
         wp_register_style( 'wz_workhard_style_dialog', plugins_url('css/dialog.css', __FILE__) );
         wp_enqueue_style('wz_workhard_style_dialog');
@@ -39,7 +39,7 @@ function wz_workhard_enqueue_scripts( $hook_suffix ){
 
         wp_localize_script( 'wz_workhard_dialog', 'WORKHARD', $workhard_vars );
         
-    } elseif ($hook_suffix == 'workhard_page_wz-options-workhard-settings-users') {
+    } elseif ($hook_suffix === 'workhard_page_wz-options-workhard-settings-users') {
         wp_register_style( 'wz_workhard_style_users', plugins_url('css/users.css', __FILE__) );
         wp_enqueue_style('wz_workhard_style_users');
         
@@ -62,7 +62,7 @@ function wz_workhard_enqueue_scripts( $hook_suffix ){
 
         wp_localize_script( 'wz_workhard_users', 'WORKHARD', $workhard_vars );
         
-    } elseif ($hook_suffix == 'workhard_page_wz-options-workhard-articles') {
+    } elseif ($hook_suffix === 'workhard_page_wz-options-workhard-articles') {
         
         wp_register_style( 'wz_workhard_style_swal', 'https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css' );
         wp_enqueue_style('wz_workhard_style_swal');
@@ -100,7 +100,7 @@ function wz_workhard_enqueue_scripts( $hook_suffix ){
         );
         wp_localize_script( 'wz_workhard_articles', 'WORKHARD', $workhard_vars );
         
-    } elseif ($hook_suffix == 'workhard_page_wz-options-workhard-statistics') {
+    } elseif ($hook_suffix === 'workhard_page_wz-options-workhard-statistics') {
         
         wp_register_style( 'wz_workhard_style_swal', 'https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css' );
         wp_enqueue_style('wz_workhard_style_swal');
@@ -130,7 +130,7 @@ function wz_workhard_enqueue_scripts( $hook_suffix ){
             'nonce' => wp_create_nonce('workhard_ajax')
         );
         wp_localize_script( 'wz_workhard_statistics', 'WORKHARD', $workhard_vars );
-    } elseif ($hook_suffix == 'workhard_page_wz-options-workhard-spreadsheet-users') {
+    } elseif ($hook_suffix === 'workhard_page_wz-options-workhard-spreadsheet-users') {
         wp_register_style( 'wz_workhard_style_swal', 'https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css' );
         wp_enqueue_style('wz_workhard_style_swal');
         

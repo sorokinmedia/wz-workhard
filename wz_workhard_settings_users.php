@@ -160,7 +160,7 @@ function wz_workhard_ajax_users() {
     }
             
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-        if (wzz_validate_params(array('method', 'user_id')) && $_GET['method'] == 'fetch_permission_folders') {
+        if (wzz_validate_params(array('method', 'user_id')) && $_GET['method'] === 'fetch_permission_folders') {
             echo json_encode(wz_fetch_permission_folders_db($_GET['user_id']));
             wp_die();
         } 
@@ -169,7 +169,7 @@ function wz_workhard_ajax_users() {
             wzz_validate_params(
                 array('method', 'user_id', 'from_folder_id', 'from_folder_name', 'to_folder_id', 'to_folder_name', 'category_id') 
             )
-            && $_POST['method'] == 'insert_permission_folders'
+            && $_POST['method'] === 'insert_permission_folders'
             
         ) {
             $result = wz_insert_permission_folders_db(
@@ -184,7 +184,7 @@ function wz_workhard_ajax_users() {
             
             echo json_encode($result);
             wp_die();
-        } elseif (wzz_validate_params(array('method', 'id')) && $_POST['method'] == 'delete_permission_folders') {
+        } elseif (wzz_validate_params(array('method', 'id')) && $_POST['method'] === 'delete_permission_folders') {
             $result = wz_delete_permission_folders_db($_POST['id']);
             echo json_encode($result);
             wp_die();

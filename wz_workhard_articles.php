@@ -170,7 +170,7 @@ function wz_workhard_ajax_articles()
             $articles = array();
 
             foreach ($folders['response'] as $folder) {
-                if ($folder['id'] === $_GET['from_folder_id']) {
+                if ($folder['id'] === (int)$_GET['from_folder_id']) {
                     $item = array();
 
                     $options = array(
@@ -178,9 +178,8 @@ function wz_workhard_ajax_articles()
                             array('status.alias', '==', 'Завершена')
                         )
                     );
-                    $tasks = wzz_fetch_folder_tasks($token, $folder['id']);
+                    $tasks = wzz_fetch_folder_tasks($token, $folder['id'])['response'];
                     $result = Arrch::find($tasks, $options);
-
                     foreach ($result as $task) {
                         $item['id'] = $task['id'];
                         $item['name'] = $task['name'];
