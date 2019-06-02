@@ -30,7 +30,7 @@ function wzz_fetch_list_messages($token) {
         'Accept: application/json',
         'Authorization: Bearer ' . $token
     );
-    $response = wzz_request('GET', 'https://api.workhard.online/v1/common/private-messages', array(), $headers);
+    $response = wzz_request('GET', 'https://api.workhard.online/v2/common/private-messages', array(), $headers);
     return json_decode($response, true);
 }
 
@@ -46,7 +46,7 @@ function wzz_fetch_messages_by_id($token, $chat_id) {
         'Accept: application/json',
         'Authorization: Bearer ' . $token
     );
-    $response = wzz_request('GET', 'https://api.workhard.online/v1/common/private-messages/' . $chat_id, array(), $headers);
+    $response = wzz_request('GET', 'https://api.workhard.online/v2/common/private-messages/' . $chat_id, array(), $headers);
     return json_decode($response, true);
 }
 
@@ -63,7 +63,7 @@ function wzz_send_message($token, $chat_id, $message) {
         'Accept: application/json',
         'Authorization: Bearer ' . $token
     );
-    $response = wzz_request('POST', 'https://api.workhard.online/v1/common/private-messages/' . $chat_id, array('message' => $message), $headers);
+    $response = wzz_request('POST', 'https://api.workhard.online/v2/common/private-messages/' . $chat_id, array('message' => $message), $headers);
     return json_decode($response, true);
 }
 
@@ -182,7 +182,7 @@ function wzz_fetch_billing_operations($token, $order='SORT_ASC', $type = array()
         $params['offset'] = $offset;
     }
     
-    $response = wzz_request('GET', 'https://api.workhard.online/v1/common/billing/operations', $params, $headers);
+    $response = wzz_request('GET', 'https://api.workhard.online/v2/common/billing/operations', $params, $headers);
     return json_decode($response, true);    
 }
 
