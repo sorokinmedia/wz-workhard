@@ -3,7 +3,7 @@
 Plugin Name: Workhard
 Description: Workhard
 Author: User
-Version: 1.3
+Version: 1.4
 */
 
 include(dirname(__FILE__).'/wz_workhard_api.php');
