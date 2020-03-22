@@ -199,12 +199,25 @@ function wz_workhard_ajax_articles()
 
             $result = $task['results'];
 
+            $post_title = ''; $post_text = ''; $post_description = '';
+
+            foreach ($result as $r) {
+                if ($r['name'] === 'Заголовок статьи') {
+                    $post_title = $r['value'];
+                }
+                if ($r['name'] === 'Текст статьи') {
+                    $post_text = $r['value'];
+                }
+                if ($r['name'] === 'Анонс' || $r['name'] === 'Дополнительные заголовки') {
+                    $post_description = $r['value'];
+                }
+            }
 
             $article = array(
                 'order_name' => $task['name'],
-                'title' => $result[0]['value'],
-                'description' => $result[1]['value'],
-                'text' => $result[2]['value'],
+                'title' => $post_title,
+                'description' => $post_description,
+                'text' => $post_text,
                 'total_price' => $task['price_customer'] + $task['price_additional_customer']
             );
             echo json_encode($article);
